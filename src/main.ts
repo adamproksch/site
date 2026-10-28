@@ -70,7 +70,6 @@ $("menu-btn").addEventListener("click", (e) => {
 $("signup-form").addEventListener("submit", (e) => {
   e.preventDefault();
   const email = ($("email") as HTMLInputElement).value.trim();
-  // TODO POST /api/signup
   $("msg").textContent = /\S+@\S+\.\S+/.test(email)
     ? "Thanks! Signups open soon, we'll email you."
     : "That email doesn't look right.";
