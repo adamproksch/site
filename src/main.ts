@@ -20,7 +20,6 @@ const logLines = [
   "12:04:10 [build]  npm ci && npm run build",
   "12:04:17 [build]  finished in 6.8s",
   "12:04:18 [start]  container nb-4821, EU West",
-  "12:04:19 [bot]    logged in as NestBot#0001",
   "12:04:19 [bot]    24 servers, 12 slash commands synced",
   "12:04:20 [health] bot is online",
 ];
