@@ -76,4 +76,4 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/api/plans", (req, res) => res.json(plans));
 app.get("/api/faqs", (req, res) => res.json(faqs));
 
-app.listen(PORT, () => console.log(`BotNest running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Discord Bot Hosting running on http://localhost:${PORT}`));

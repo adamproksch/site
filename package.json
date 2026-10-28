@@ -1,5 +1,5 @@
 {
-  "name": "botnest",
+  "name": "discord-bot-hosting",
   "version": "1.0.0",
   "description": "Discord bot hosting site",
   "main": "server.js",
