@@ -12,7 +12,7 @@ interface Faq {
   a: string;
 }
 
-const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+const $ = (id: string) => document.getElementById(id)!;
 
 let plans: Plan[] = [];
 let yearly = false;
@@ -69,8 +69,8 @@ $("menu-btn").addEventListener("click", (e) => {
 
 $("signup-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = $<HTMLInputElement>("email").value.trim();
-  // TODO: hook up to the real signup endpoint once it exists
+  const email = ($("email") as HTMLInputElement).value.trim();
+  // TODO POST /api/signup
   $("msg").textContent = /\S+@\S+\.\S+/.test(email)
     ? "Thanks! Signups open soon, we'll email you."
     : "That email doesn't look right.";
@@ -78,11 +78,10 @@ $("signup-form").addEventListener("submit", (e) => {
 
 async function load() {
   try {
-    const [plansRes, faqRes] = await Promise.all([fetch("/api/plans"), fetch("/api/faqs")]);
-    plans = await plansRes.json();
+    plans = await (await fetch("/api/plans")).json();
     renderPlans();
 
-    const faqs: Faq[] = await faqRes.json();
+    const faqs: Faq[] = await (await fetch("/api/faqs")).json();
     $("faqs").innerHTML = faqs
       .map((f) => `<details class="faq-item"><summary>${f.q}</summary><p>${f.a}</p></details>`)
       .join("");
