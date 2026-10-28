@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BotNest: Discord bot hosting</title>
+  <meta name="description" content="Run Discord bots in isolated containers. Deploy from GitHub, read logs in your browser, recover from crashes automatically. Demo landing page." />
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#top" class="logo"><span class="logo-sq" aria-hidden="true"></span>BotNest</a>
+      <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <nav id="nav-links" aria-label="Main">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#start" class="btn primary nav-cta">Create free account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero wrap" id="top">
+      <div class="hero-copy">
+        <h1>Push to GitHub. Your bot restarts itself.</h1>
+        <p class="lead">BotNest runs Discord bots in isolated containers. Connect a repo, add your token, and read the logs from your browser.</p>
+        <div class="actions">
+          <a href="#start" class="btn primary">Create free account</a>
+          <a href="#pricing" class="link">See pricing</a>
+        </div>
+        <p class="mono note">Node.js · Python · Java · Go</p>
+      </div>
+
+      <figure class="terminal">
+        <figcaption class="term-head mono">Example deploy · my-bot · main@a41f9c2</figcaption>
+        <div id="log" class="term-body mono" role="log" aria-label="Example deploy log"></div>
+      </figure>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section features wrap" id="features">
+      <div class="side">
+        <h2>What you get</h2>
+        <p class="muted">The boring parts of running a bot, handled, so you can get back to writing commands.</p>
+      </div>
+      <div class="rows">
+        <div class="row reveal"><h3>Git deploys</h3><p>Connect a branch. Every push builds the project and restarts the bot, and a failed build leaves the running version alone.</p></div>
+        <div class="row reveal"><h3>Browser console</h3><p>Live logs and a command line in the panel. No SSH key to set up or lose.</p></div>
+        <div class="row reveal"><h3>Crash recovery</h3><p>A crashed bot restarts on its own and posts the last 20 log lines to a Discord channel you choose.</p></div>
+        <div class="row reveal"><h3>Backups</h3><p>Files and databases are copied every day. Restore any copy from the panel.</p></div>
+        <div class="row reveal"><h3>Six regions</h3><p>US East, US West, EU West, EU Central, Singapore and Sydney. Pick the one closest to your members.</p></div>
+        <div class="row reveal"><h3>Isolation</h3><p>Each bot gets its own container with fixed CPU and memory, so another customer's bot can't slow yours down.</p></div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section how wrap" id="how">
+      <h2>From repo to online in three steps</h2>
+      <ol class="steps">
+        <li class="reveal"><span class="num mono">01</span><h3>Connect your repo</h3><p>Link GitHub or upload a zip. BotNest detects the language and picks a start command you can edit.</p></li>
+        <li class="reveal"><span class="num mono">02</span><h3>Add your token</h3><p>Paste the bot token and any environment variables. They are encrypted, and the panel never shows them again.</p></li>
+        <li class="reveal"><span class="num mono">03</span><h3>Deploy</h3><p>Watch the build in the console. When the health check passes, the bot is online.</p></li>
+      </ol>
+    </section>
+
+    <!-- PANEL PREVIEW -->
+    <section class="panel-band" id="panel">
+      <div class="wrap panel-grid">
+        <div class="side">
+          <h2>One screen for each bot</h2>
+          <p class="muted">Status, resource use and recent activity, without digging through menus. This is a static preview with example data.</p>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-head">
+            <div>
+              <h3>NestBot</h3>
+              <p class="mono muted small">Node.js 20 · EU West</p>
+            </div>
+            <p class="status"><span class="dot" aria-hidden="true"></span>Online</p>
+          </div>
+          <dl class="metrics">
+            <div><dt>CPU</dt><dd class="mono">12.4%</dd></div>
+            <div><dt>Memory</dt><dd class="mono">212 MB</dd></div>
+            <div><dt>Servers</dt><dd class="mono">24</dd></div>
+            <div><dt>Uptime</dt><dd class="mono">14 d 6 h</dd></div>
+          </dl>
+          <div class="chart" role="img" aria-label="Bar chart of CPU use over the last 24 hours, example data">
+            <i style="height:38%"></i><i style="height:52%"></i><i style="height:30%"></i><i style="height:44%"></i><i style="height:61%"></i><i style="height:35%"></i><i style="height:48%"></i><i style="height:72%"></i><i style="height:56%"></i><i style="height:40%"></i><i style="height:33%"></i><i style="height:58%"></i><i style="height:47%"></i><i style="height:66%"></i><i style="height:42%"></i><i style="height:36%"></i><i style="height:51%"></i><i style="height:63%"></i><i style="height:45%"></i><i style="height:39%"></i><i style="height:54%"></i><i style="height:49%"></i><i style="height:34%"></i><i style="height:41%"></i>
+          </div>
+          <p class="mono muted small">CPU, last 24 hours (example data)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section pricing wrap" id="pricing">
+      <div class="pricing-head">
+        <h2>Pricing</h2>
+        <div class="seg" role="group" aria-label="Billing period">
+          <button id="bill-m" type="button" aria-pressed="true">Monthly</button>
+          <button id="bill-y" type="button" aria-pressed="false">Yearly, 2 months free</button>
+        </div>
+      </div>
+      <div id="plans" class="plans"><p class="muted">Loading plans…</p></div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="section reviews wrap" id="reviews">
+      <h2>What early users say</h2>
+      <p class="muted placeholder-note">These are placeholder reviews for the demo. Swap in real ones before launch.</p>
+      <div id="review-list" class="review-list"><p class="muted">Loading reviews…</p></div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq wrap" id="faq">
+      <div class="side"><h2>Questions</h2></div>
+      <div id="faqs" class="faq-list"><p class="muted">Loading questions…</p></div>
+    </section>
+
+    <!-- CTA -->
+    <section class="start" id="start">
+      <div class="wrap start-inner">
+        <h2>Put your bot online</h2>
+        <p>Create a free account. Pay only when you need more bots or more memory.</p>
+        <form id="start-form" class="start-form" novalidate>
+          <label class="sr" for="email">Email address</label>
+          <input id="email" type="email" required autocomplete="email" placeholder="you@yourserver.gg" />
+          <button class="btn light" type="submit">Create free account</button>
+        </form>
+        <p id="start-msg" class="start-msg" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <a href="#top" class="logo"><span class="logo-sq" aria-hidden="true"></span>BotNest</a>
+    <p class="muted small">A demo concept. Prices, reviews and screens are placeholders.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
