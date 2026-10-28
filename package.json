@@ -1,0 +1,17 @@
+{
+  "name": "botnest",
+  "version": "1.0.0",
+  "description": "BotNest - Discord bot hosting landing page (demo)",
+  "main": "server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node server.js",
+    "dev": "tsc && node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
