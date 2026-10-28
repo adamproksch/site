@@ -1,7 +1,7 @@
 {
   "name": "botnest",
   "version": "1.0.0",
-  "description": "BotNest - Discord bot hosting landing page (demo)",
+  "description": "Discord bot hosting site",
   "main": "server.js",
   "scripts": {
     "build": "tsc",
