@@ -1,95 +1,74 @@
 "use strict";
+const $ = (id) => document.getElementById(id);
 let plans = [];
 let yearly = false;
+// fake deploy output for the hero
 const logLines = [
-    "12:04:09 [push]   received on main@a41f9c2",
+    "12:04:09 [push]   main @ a41f9c2",
     "12:04:10 [build]  npm ci && npm run build",
-    "12:04:17 [build]  finished in 6.8s",
-    "12:04:18 [start]  container nb-4821, EU West",
-    "12:04:19 [bot]    24 servers, 12 slash commands synced",
-    "12:04:20 [health] bot is online",
+    "12:04:17 [build]  ok (6.8s)",
+    "12:04:18 [start]  eu-central",
+    "12:04:19 [bot]    ready, 24 guilds",
+    "12:04:20 [health] passing",
 ];
-function showLog(i) {
-    if (i >= logLines.length)
-        return;
-    const log = document.getElementById("log");
-    log.innerHTML += logLines[i].replace(/\[(\w+)\]/, '<span class="tag">[$1]</span>') + "\n";
-    setTimeout(function () {
-        showLog(i + 1);
-    }, 500);
-}
-function showPlans() {
-    let html = "";
-    for (let i = 0; i < plans.length; i++) {
-        const p = plans[i];
-        let price = p.monthly;
-        if (yearly) {
-            price = p.yearly;
-        }
-        let priceText = "Free";
-        if (price > 0) {
-            priceText = "$" + price + "<span class='small'> /month</span>";
-        }
-        let list = "";
-        for (let j = 0; j < p.features.length; j++) {
-            list += "<li>" + p.features[j] + "</li>";
-        }
-        html += "<div class='plan" + (p.featured ? " featured" : "") + "'>";
-        html += "<h3>" + p.name + "</h3>";
-        html += "<p>" + p.tagline + "</p>";
-        html += "<div class='price'>" + priceText + "</div>";
-        html += "<ul>" + list + "</ul>";
-        html += "<a href='#signup' class='btn'>Choose " + p.name + "</a>";
-        html += "</div>";
+async function playLog() {
+    const log = $("log");
+    for (const line of logLines) {
+        log.innerHTML += line.replace(/\[(\w+)\]/, '<span class="tag">[$1]</span>') + "\n";
+        await new Promise((r) => setTimeout(r, 450));
     }
-    document.getElementById("plans").innerHTML = html;
 }
-function showFaqs(faqs) {
-    let html = "";
-    for (let i = 0; i < faqs.length; i++) {
-        html += "<details class='faq-item'><summary>" + faqs[i].q + "</summary><p>" + faqs[i].a + "</p></details>";
-    }
-    document.getElementById("faqs").innerHTML = html;
+function renderPlans() {
+    $("plans").innerHTML = plans
+        .map((p) => {
+        const price = yearly ? p.yearly : p.monthly;
+        const priceText = price ? `$${price}<span class="small"> /mo</span>` : "Free";
+        return `
+        <div class="plan${p.featured ? " featured" : ""}">
+          <h3>${p.name}</h3>
+          <p>${p.tagline}</p>
+          <div class="price">${priceText}</div>
+          <ul>${p.features.map((f) => `<li>${f}</li>`).join("")}</ul>
+          <a href="#signup" class="btn">Choose ${p.name}</a>
+        </div>`;
+    })
+        .join("");
 }
-document.getElementById("monthly").addEventListener("click", function () {
-    yearly = false;
-    document.getElementById("monthly").classList.add("active");
-    document.getElementById("yearly").classList.remove("active");
-    showPlans();
+function setBilling(isYearly) {
+    yearly = isYearly;
+    $("monthly").classList.toggle("active", !yearly);
+    $("yearly").classList.toggle("active", yearly);
+    renderPlans();
+}
+$("monthly").addEventListener("click", () => setBilling(false));
+$("yearly").addEventListener("click", () => setBilling(true));
+$("menu-btn").addEventListener("click", (e) => {
+    const open = $("nav").classList.toggle("open");
+    e.currentTarget.setAttribute("aria-expanded", String(open));
 });
-document.getElementById("yearly").addEventListener("click", function () {
-    yearly = true;
-    document.getElementById("yearly").classList.add("active");
-    document.getElementById("monthly").classList.remove("active");
-    showPlans();
-});
-document.getElementById("menu-btn").addEventListener("click", function () {
-    document.getElementById("nav").classList.toggle("open");
-});
-document.getElementById("signup-form").addEventListener("submit", function (e) {
+$("signup-form").addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = document.getElementById("email").value;
-    const msg = document.getElementById("msg");
-    if (email == "" || email.indexOf("@") == -1) {
-        msg.innerText = "Please enter a valid email.";
+    const email = $("email").value.trim();
+    // TODO: hook up to the real signup endpoint once it exists
+    $("msg").textContent = /\S+@\S+\.\S+/.test(email)
+        ? "Thanks! Signups open soon, we'll email you."
+        : "That email doesn't look right.";
+});
+async function load() {
+    try {
+        const [plansRes, faqRes] = await Promise.all([fetch("/api/plans"), fetch("/api/faqs")]);
+        plans = await plansRes.json();
+        renderPlans();
+        const faqs = await faqRes.json();
+        $("faqs").innerHTML = faqs
+            .map((f) => `<details class="faq-item"><summary>${f.q}</summary><p>${f.a}</p></details>`)
+            .join("");
     }
-    else {
-        msg.innerText = "Signups aren't open yet, check back soon!";
+    catch (err) {
+        console.error(err);
+        $("plans").textContent = "Couldn't load pricing, try refreshing.";
+        $("faqs").textContent = "";
     }
-});
-fetch("/api/plans")
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-    plans = data;
-    showPlans();
-})
-    .catch(function () {
-    document.getElementById("plans").innerHTML = "Couldn't load plans.";
-});
-fetch("/api/faqs")
-    .then(function (res) { return res.json(); })
-    .then(function (data) { showFaqs(data); })
-    .catch(function () {
-    document.getElementById("faqs").innerHTML = "Couldn't load FAQ.";
-});
-showLog(0);
+}
+load();
+playLog();

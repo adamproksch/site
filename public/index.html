@@ -3,101 +3,104 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Discord Bot Hosting</title>
+  <title>BotNest – Discord bot hosting</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="header">
+<header class="site-header">
   <div class="container">
-    <a href="#" class="logo">Discord Hosting</a>
-    <button id="menu-btn">Menu</button>
-    <div id="nav">
+    <a href="#" class="logo">BotNest</a>
+    <button id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <a href="#signup" class="btn">Sign up</a>
-    </div>
+    </nav>
   </div>
-</div>
+</header>
 
-<div class="hero">
-  <div class="container">
-    <div class="hero-text">
-      <h1>Host your Discord bot</h1>
-      <p>Connect your GitHub repo, add your token and your bot stays online. Every push restarts it with the new code.</p>
-      <a href="#signup" class="btn">Get started free</a>
-      <p class="small">Supports Node.js, Python, Java and Go</p>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <h1>Keep your Discord bot online</h1>
+        <p>Point us at your GitHub repo, paste your token, done. When you push, we rebuild and restart it for you.</p>
+        <a href="#signup" class="btn">Get started free</a>
+        <p class="small">Node.js, Python, Java and Go</p>
+      </div>
+      <pre id="log"></pre>
     </div>
-    <div id="log"></div>
-  </div>
-</div>
+  </section>
 
-<div class="container" id="features">
-  <h2>Features</h2>
-  <div class="features">
-    <div class="feature">
-      <h3>Git deploys</h3>
-      <p>Every push builds and restarts your bot. If the build fails the old version keeps running.</p>
+  <section class="container" id="features">
+    <h2>What you get</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Deploy on push</h3>
+        <p>Push to your branch and the bot rebuilds. A broken build doesn't take it down, the last working version stays up.</p>
+      </div>
+      <div class="feature">
+        <h3>Web console</h3>
+        <p>Logs, restarts and a shell right in the browser.</p>
+      </div>
+      <div class="feature">
+        <h3>Crash alerts</h3>
+        <p>When the bot crashes we restart it and post the last 20 log lines to a channel of your choice.</p>
+      </div>
+      <div class="feature">
+        <h3>Backups</h3>
+        <p>Files and databases are backed up automatically. How long we keep them depends on your plan.</p>
+      </div>
+      <div class="feature">
+        <h3>Pick a region</h3>
+        <p>US East, US West, Frankfurt, London, Singapore or Sydney.</p>
+      </div>
+      <div class="feature">
+        <h3>Isolated</h3>
+        <p>Every bot gets its own container, so a noisy neighbour can't eat your CPU.</p>
+      </div>
     </div>
-    <div class="feature">
-      <h3>Web console</h3>
-      <p>See logs and run commands from the panel, no SSH needed.</p>
-    </div>
-    <div class="feature">
-      <h3>Auto restart</h3>
-      <p>If your bot crashes it restarts and sends the last 20 log lines to a channel you pick.</p>
-    </div>
-    <div class="feature">
-      <h3>Backups</h3>
-      <p>Your files and databases get backed up every day.</p>
-    </div>
-    <div class="feature">
-      <h3>6 regions</h3>
-      <p>US East, US West, EU West, EU Central, Singapore and Sydney.</p>
-    </div>
-    <div class="feature">
-      <h3>Own container</h3>
-      <p>Each bot runs in its own container with set CPU and memory.</p>
-    </div>
-  </div>
-</div>
+  </section>
 
-<div class="container" id="how">
-  <h2>How it works</h2>
-  <ol>
-    <li><b>Connect your repo</b> - link GitHub or upload a zip. We figure out the language and start command.</li>
-    <li><b>Add your token</b> - paste your bot token and any env variables.</li>
-    <li><b>Deploy</b> - watch it build in the console and your bot comes online.</li>
-  </ol>
-</div>
+  <section class="container" id="how">
+    <h2>How it works</h2>
+    <ol>
+      <li><b>Connect a repo.</b> GitHub works, or upload a zip. We detect the language and how to start it (you can override this).</li>
+      <li><b>Add your token</b> and whatever env vars the bot needs.</li>
+      <li><b>Hit deploy</b> and watch the build in the console.</li>
+    </ol>
+  </section>
 
-<div class="container" id="pricing">
-  <h2>Pricing</h2>
-  <p>
-    <button id="monthly" class="toggle active">Monthly</button>
-    <button id="yearly" class="toggle">Yearly (2 months free)</button>
-  </p>
-  <div id="plans">Loading...</div>
-</div>
+  <section class="container" id="pricing">
+    <h2>Pricing</h2>
+    <div class="billing">
+      <button id="monthly" class="toggle active">Monthly</button>
+      <button id="yearly" class="toggle">Yearly</button>
+      <span class="small">save 2 months</span>
+    </div>
+    <div id="plans">Loading plans…</div>
+  </section>
 
-<div class="container" id="faq">
-  <h2>FAQ</h2>
-  <div id="faqs">Loading...</div>
-</div>
+  <section class="container" id="faq">
+    <h2>FAQ</h2>
+    <div id="faqs">Loading…</div>
+  </section>
 
-<div class="signup" id="signup">
-  <div class="container">
-    <h2>Get your bot online</h2>
-    <p>Free to start. Upgrade when you need more bots or memory.</p>
-    <form id="signup-form">
-      <input id="email" type="email" placeholder="Email">
-      <button type="submit" class="btn">Sign up</button>
-    </form>
-    <p id="msg"></p>
-  </div>
-</div>
+  <section class="signup" id="signup">
+    <div class="container">
+      <h2>Get your bot online</h2>
+      <p>The Starter plan is free. Upgrade if you outgrow it.</p>
+      <form id="signup-form" novalidate>
+        <input id="email" type="email" placeholder="you@example.com" aria-label="Email">
+        <button type="submit" class="btn">Sign up</button>
+      </form>
+      <p id="msg" role="status"></p>
+    </div>
+  </section>
+</main>
 
 <script src="js/main.js"></script>
 </body>
