@@ -2,7 +2,7 @@
 const $ = (id) => document.getElementById(id);
 let plans = [];
 let yearly = false;
-// fake deploy output for the hero
+// fake deploy output
 const logLines = [
     "12:04:09 [push]   main @ a41f9c2",
     "12:04:10 [build]  npm ci && npm run build",
